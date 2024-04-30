@@ -1,6 +1,10 @@
 from django.shortcuts import render,redirect
 from .models import Contact
 from django.contrib import messages
+from django.contrib.auth import login,authenticate, logout
+from django.contrib.auth.forms import UserCreationForm
+from.models import Profile
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def contact_view(request):
@@ -18,3 +22,66 @@ def contact_view(request):
         else:
             messages.error(request, "Please fill in all the field")
     return render(request, 'contact.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                messages.success(request, "You are logged in successfully")
+                return redirect('profile')
+            else:
+                messages.error(request, "Invalid username or password")
+    return render(request, 'accounts/login.html')
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You are logged out successfully")
+    return redirect('home')
+# register
+def register_view(request):
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "account created successfully")
+        return redirect('profile')
+    return render(request,'accounts/register.html',{'form': form})
+
+@login_required
+def profile_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        gender =  request.POST.get('gender')
+        age = request.POST.get('age')
+        photo = request.FILES.get('photo')
+         
+        corporate = request.POST.get('corporate')
+        position = request.POST.get('position')
+        my_skills = request.POST.get('myskills')
+        needed_skills = request.POST.get('nskills')
+        free_time = request.POST.get('freetime')
+        if name and email:
+            profile = Profile(
+                name=name, 
+                email=email,
+                gender = gender,
+                age = age,
+                photo = photo,
+                corporate = corporate,
+                position = position,
+                my_skills = my_skills,
+                needed_skills = needed_skills,
+                free_time = free_time
+            )
+            profile.save()
+            messages.success(request, "Profile created successfully")
+            return redirect('profile')
+        else:
+            messages.error(request, "Please fill in all the fields")
+    return render(request, 'accounts/profile.html')
+
+

@@ -8,6 +8,7 @@ class Category(models.Model):
 
   def __str__(self):
     return self.title
+  
 
 
 class Contact(models.Model):
@@ -29,10 +30,20 @@ class Profile(models.Model):
   name = models.CharField(max_length=50)
   corporate = models.CharField(max_length=50)
   position = models.CharField(max_length=50)
-  exchange = models.CharField(max_length=50)
-  free_time = models.DateTimeField(editable=True)
+  my_skills_choices = (
+    ('marketing','Marketing'),
+    ('project_management','Project Management'),
+    ('customer service','customer service'),
+    ('software development','Software Development'),
+  )
+  my_skills = models.CharField(max_length=50,default='software development')  
+  needed_skills = models.TextField(max_length=50,default='software development')
+  free_time = models.TimeField()
   gender= models.CharField(max_length=10,choices=geneder_choices)
   image = models.ImageField(upload_to='profiles')
+  age = models.IntegerField()
+  email = models.EmailField()
+  photo = models.ImageField(upload_to='profiles')
 
   def __str__(self):
     return self.name
@@ -42,10 +53,11 @@ class Skill(models.Model):
     ('marketing','Marketing'),
     ('project_management','Project Management'),
     ('customer service','customer service'),
+    ('software development','Software Development'),
   )
   user = models.CharField(max_length=50)
   skill= models.CharField(max_length=50,choices=skill_choices)
-  experience = models.DateField(editable=True)
+  experience = models.IntegerField(max_length=10)
   def __str__(self):
     return self.user
   
@@ -58,3 +70,7 @@ class Workdemo(models.Model):
 
   def __str__(self):
     return self.user
+  
+
+
+  
