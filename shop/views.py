@@ -52,12 +52,23 @@ def register_view(request):
 
 @login_required
 def profile_view(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    if not profile:
+        return redirect('profile_update')
+
+    return render(request, 'accounts/profile.html', {
+        'profile': profile
+    })
+
+
+@login_required
+def profile_update_view(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
         gender =  request.POST.get('gender')
         age = request.POST.get('age')
-        photo = request.FILES.get('photo')
+        photo = request.FILES.get('image')
          
         corporate = request.POST.get('corporate')
         position = request.POST.get('position')
@@ -75,13 +86,14 @@ def profile_view(request):
                 position = position,
                 my_skills = my_skills,
                 needed_skills = needed_skills,
-                free_time = free_time
+                free_time = free_time,
+                user = request.user
             )
             profile.save()
             messages.success(request, "Profile created successfully")
             return redirect('profile')
         else:
             messages.error(request, "Please fill in all the fields")
-    return render(request, 'accounts/profile.html')
+    return render(request, 'accounts/profile_form.html')
 
 

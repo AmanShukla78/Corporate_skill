@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Category(models.Model):
   title = models.CharField(max_length=50)
@@ -22,6 +22,7 @@ class Contact(models.Model):
     return self.name
    
 class Profile(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
   geneder_choices = (
     ('male','Male'),
     ('female','Female'),
@@ -57,7 +58,7 @@ class Skill(models.Model):
   )
   user = models.CharField(max_length=50)
   skill= models.CharField(max_length=50,choices=skill_choices)
-  experience = models.IntegerField(max_length=10)
+  experience = models.IntegerField(default=1)
   def __str__(self):
     return self.user
   
