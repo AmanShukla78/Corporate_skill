@@ -5,6 +5,7 @@ from django.contrib.auth import login,authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from.models import Profile
 from django.contrib.auth.decorators import login_required
+from .forms import ProfileForm
 
 # Create your views here.
 def contact_view(request):
@@ -81,7 +82,7 @@ def profile_update_view(request):
                 email=email,
                 gender = gender,
                 age = age,
-                photo = photo,
+                image = photo,
                 corporate = corporate,
                 position = position,
                 my_skills = my_skills,
@@ -96,4 +97,21 @@ def profile_update_view(request):
             messages.error(request, "Please fill in all the fields")
     return render(request, 'accounts/profile_form.html')
 
+@login_required
+def profile_edit_view(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    try:
+        form = ProfileForm(instance=profile)
+        if request.method == 'POST':
+            form = ProfileForm(request.POST, request.FILES, instance=profile)
+            if form.is_valid():
+                form.save()
+                messages.success(request,"Profile updated")
+                return redirect('profile')
+        return render(request, 'accounts/profile_edit.html', {
+            'form' : form
+        })
+    except Exception as e:
+        print(e)
+        return redirect('/profile')
 

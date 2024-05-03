@@ -40,11 +40,12 @@ class Profile(models.Model):
   my_skills = models.CharField(max_length=50,default='software development')  
   needed_skills = models.TextField(max_length=50,default='software development')
   free_time = models.TimeField()
+  bio = models.CharField(max_length=200,default=1)
   gender= models.CharField(max_length=10,choices=geneder_choices)
   image = models.ImageField(upload_to='profiles')
   age = models.IntegerField()
   email = models.EmailField()
-  photo = models.ImageField(upload_to='profiles')
+  # photo = models.ImageField(upload_to='profiles')
 
   def __str__(self):
     return self.name

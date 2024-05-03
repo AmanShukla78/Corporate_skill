@@ -8,66 +8,77 @@ Profile
 {% block content %}
 <section>
     <div class="container px-4 py-5">
-        
+
         {% if profile.image %}
-        <img src="{{profile.image.url}}" alt="{{profile.name}}" class="rounded-lg">
-
+        <img src="{{profile.image.url}}" alt="{{profile.name}}" class="img-thumbnail" style="height: 100px;">
         {% endif %}
-            
-        <h2 class="pb-2 border-bottom">{{profile.name}}</h2>
 
+        <h2 class="pb-2 border-bottom">{{profile.name}}
+            <a href="{% url 'profile_edit' %}">
+                <i class="fa fa-pencil"></i> Edit
+            </a>
+        </h2>
+        <!--
         <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
             <div class="col d-flex flex-column align-items-start gap-2">
                 <h2 class="fw-bold text-body-emphasis"></h2>
-                <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll add
-                    onto it with another sentence and probably just keep going until we run out of words.</p>
+                <p class="text-body-secondary"></p>
                 <a href="#" class="btn btn-primary btn-lg">Connect</a>
-            </div>
+            </div> -->
 
             <div class="col">
                 <div class="row row-cols-1 row-cols-sm-2 g-4">
                     <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">My Skills</h4> -->
                         <div
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
+                               
                                 <use xlink:href="#collection"></use>
                             </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">My Skills</h4>
                         </div>
-                        <h4 class="fw-semibold mb-0 text-body-emphasis">{{profile.my_skills}}</h4>
-                        <p class="text-body-secondary">Lorem ipsum dolor sit.</p>
+
+                        <p class="text-body-secondary">{{profile.my_skills}}</p>
                     </div>
 
                     <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">Needed Skills</h4> -->
                         <div
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
                                 <use xlink:href="#gear-fill"></use>
-                            </svg>
+                            </svg><h4 class="fw-semibold mb-0 text-body-emphasis">Needed Skills</h4>
                         </div>
-                        <h4 class="fw-semibold mb-0 text-body-emphasis">{{profile.needed_skills}}</h4>
-                        <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
+
+                        <p class="text-body-secondary">{{profile.needed_skills}}</p>
                     </div>
 
                     <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">My Corporate</h4> -->
                         <div
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
                                 <use xlink:href="#speedometer"></use>
+
                             </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">My Corporate</h4>
                         </div>
-                        <h4 class="fw-semibold mb-0 text-body-emphasis">{{profile.corporate}}</h4>
-                        <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
+
+                        <p class="text-body-secondary">{{profile.corporate}}</p>
                     </div>
 
                     <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">My Occupation</h4> -->
+
                         <div
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
                                 <use xlink:href="#table"></use>
-                            </svg>
+                            </svg><h4 class="fw-semibold mb-0 text-body-emphasis">My Occupation</h4>
                         </div>
-                        <h4 class="fw-semibold mb-0 text-body-emphasis">{{profile.position}}</h4>
-                        <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
+
+                        <p class="text-body-secondary">{{profile.position}}</p>
                     </div>
                 </div>
             </div>

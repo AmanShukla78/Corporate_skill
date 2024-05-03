@@ -16,7 +16,8 @@ urlpatterns = [
     path('register',register_view, name='register'),
     path('contact', contact_view, name='contact'),
     path('profile', profile_view, name='profile'),
-    path('profile/update', profile_update_view, name='profile_update'),
+    path('profile/create', profile_update_view, name='profile_update'),
+    path('profile/edit', profile_edit_view, name='profile_edit'),
     
     
 
