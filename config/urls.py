@@ -19,6 +19,9 @@ urlpatterns = [
     path('profile/create', profile_update_view, name='profile_update'),
     path('profile/edit', profile_edit_view, name='profile_edit'),
     
+    path('people/list', people_list_view, name='people_list'),
+    path('person/<int:id>/view', person_view, name='person_list'),
+    path('person/<int:id>/chat', person_chat_view, name='person_chat'),
     
 
 ]

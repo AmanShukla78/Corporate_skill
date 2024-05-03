@@ -9,16 +9,21 @@ Profile
 <section>
     <div class="container px-4 py-5">
 
-        {% if profile.image %}
-        <img src="{{profile.image.url}}" alt="{{profile.name}}" class="img-thumbnail" style="height: 100px;">
-        {% endif %}
+        <div class="row">
+            {% if profile.image %}
+            <img src="{{profile.image.url}}" alt="{{profile.name}}" class="img-fluid" style="height: 100px;object-fit:cover">
+            {% endif %}
 
-        <h2 class="pb-2 border-bottom">{{profile.name}}
-            <a href="{% url 'profile_edit' %}">
-                <i class="fa fa-pencil"></i> Edit
-            </a>
-        </h2>
-        <!--
+            <h2 class="pb-2 border-bottom">{{profile.name}}
+
+                {% if request.user == profile.user %}
+                <a href="{% url 'profile_edit' %}">
+                    <i class="fa fa-pencil"></i> Edit
+                </a>
+                {% endif %}
+
+            </h2>
+            <!--
         <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
             <div class="col d-flex flex-column align-items-start gap-2">
                 <h2 class="fw-bold text-body-emphasis"></h2>
@@ -33,7 +38,7 @@ Profile
                         <div
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
-                               
+
                                 <use xlink:href="#collection"></use>
                             </svg>
                             <h4 class="fw-semibold mb-0 text-body-emphasis">My Skills</h4>
@@ -48,7 +53,8 @@ Profile
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
                                 <use xlink:href="#gear-fill"></use>
-                            </svg><h4 class="fw-semibold mb-0 text-body-emphasis">Needed Skills</h4>
+                            </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">Needed Skills</h4>
                         </div>
 
                         <p class="text-body-secondary">{{profile.needed_skills}}</p>
@@ -75,13 +81,15 @@ Profile
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
                                 <use xlink:href="#table"></use>
-                            </svg><h4 class="fw-semibold mb-0 text-body-emphasis">My Occupation</h4>
+                            </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">My Occupation</h4>
                         </div>
 
                         <p class="text-body-secondary">{{profile.position}}</p>
                     </div>
                 </div>
             </div>
+     
         </div>
     </div>
 </section>

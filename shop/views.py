@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from.models import Profile
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
+from django.contrib.auth.models import User, Group
 
 # Create your views here.
 def contact_view(request):
@@ -115,3 +116,24 @@ def profile_edit_view(request):
         print(e)
         return redirect('/profile')
 
+@login_required
+def people_list_view(request):
+    users = User.objects.all().exclude(id=request.user.id)
+    return render(request, 'peoples_list.html', {
+        'users': users
+    })
+
+@login_required
+def person_view(request, id):
+    user = User.objects.get(id=id)
+    profile = Profile.objects.filter(user=user).first()
+    return render(request, 'person_view.html', {
+        'profile': profile
+    })
+
+@login_required
+def person_chat_view(request, id):
+    user = User.objects.get(id=id)
+    return render(request,'chat.html', {
+        'user': user
+    })
