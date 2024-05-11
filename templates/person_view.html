@@ -1,0 +1,88 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+
+{% block content %}
+<section class="container d-flex justify-content-center" >
+   <div class="card text-center " style="width:45rem";>
+   <div class="container px-4 py-5 justify-content-center align-items-center">
+        <div class="sidenav">
+            <div class="profile">
+                
+                {% if profile.image %}
+                <img src="{{profile.image.url}}" alt="" width="100" height="100">
+                {% else %}
+                    
+                {% endif %}
+                    
+                <h3>{{profile.name}}</h3>
+                </div>
+    
+            <div class="col">
+                <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">My Skills</h4> -->
+                        <div
+                            class="feature-icon-small d-inline-flex align-items-left justify-content-center text-bg-primary bg-gradient fs-2 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+
+                                <use xlink:href="#collection"></use>
+                            </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">My Skills</h4>
+                        </div>
+
+                        <p class="text-body-secondary">{{profile.my_skills}}</p>
+                    </div>
+
+                    <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">Needed Skills</h4> -->
+                        <div
+                            class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                                <use xlink:href="#gear-fill"></use>
+                            </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">Needed Skills</h4>
+                        </div>
+
+                        <p class="text-body-secondary">{{profile.needed_skills}}</p>
+                    </div>
+
+                    <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">My Corporate</h4> -->
+                        <div
+                            class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                                <use xlink:href="#speedometer"></use>
+
+                            </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">My Corporate</h4>
+                        </div>
+
+                        <p class="text-body-secondary">{{profile.corporate}}</p>
+                    </div>
+
+                    <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">My Occupation</h4> -->
+
+                        <div
+                            class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
+                                <use xlink:href="#table"></use>
+                            </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">My Occupation</h4>
+                        </div>
+
+                        <p class="text-body-secondary">{{profile.position}}</p>
+                    </div>
+                </div>
+            </div>
+     
+        </div>
+    </div>
+</div>
+</section>
+{% endblock content %}
+                

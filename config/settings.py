@@ -150,3 +150,6 @@ EMAIL_HOST_USER = "amanshukla5931@digipodium.com"
 EMAIL_HOST_PASSWORD = "digi59312k23"
  #Other 3rd party settings
  
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'

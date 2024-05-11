@@ -11,6 +11,10 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name='index.html'), name='home'),
     path('inner',TemplateView.as_view(template_name='inner.html'), name='inner'),
     path('about',TemplateView.as_view(template_name='about.html'), name='about'),
+    path('chat',TemplateView.as_view(template_name='chat.html'), name='chat'),
+    path('terms',TemplateView.as_view(template_name='terms.html'), name='terms'),
+    path('FAQ',TemplateView.as_view(template_name='FAQ.html'), name='FAQ'),
+    path('person_view',TemplateView.as_view(template_name='person_view.html'), name='person_view'),
     path('login',login_view, name='login'),
     path('logout',logout_view, name='logout'),
     path('register',register_view, name='register'),
@@ -19,9 +23,11 @@ urlpatterns = [
     path('profile/create', profile_update_view, name='profile_update'),
     path('profile/edit', profile_edit_view, name='profile_edit'),
     
+    
     path('people/list', people_list_view, name='people_list'),
     path('person/<int:id>/view', person_view, name='person_list'),
     path('person/<int:id>/chat', person_chat_view, name='person_chat'),
+    
     
 
 ]
