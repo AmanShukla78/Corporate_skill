@@ -19,17 +19,31 @@ Profile
                 {% endif %}
                     
                 <h3>{{profile.name}}</h3>
-                </div>
-                
-                {% if request.user == profile.user %}
-                6              
+                {% if request.user == profile.user %}          
                 <a href="{% url 'profile_edit' %}">
                     <i class="fa fa-pencil"></i> Edit
                 </a>
                 {% endif %}
+                </div>
+    
+            <div class="col">
+                <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">My Skills</h4> -->
+                        <div
+                            class="feature-icon-small d-inline-flex align-items-left justify-content-center text-bg-primary bg-gradient fs-2 rounded-3">
+                            <svg class="bi" width="1em" height="1em">
 
-            </h2>
-           
+                                <use xlink:href="#collection"></use>
+                            </svg>
+                            <h4 class="fw-semibold mb-0 text-body-emphasis">My Skills</h4>
+                        </div>
+
+                        <p class="text-body-secondary">{{profile.my_skills}}</p>
+                    </div>
+
+                    <div class="col d-flex flex-column gap-2">
+                        <!-- <h4 class="fw-semibold mb-0 text-body-emphasis">Needed Skills</h4> -->
                         <div
                             class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
                             <svg class="bi" width="1em" height="1em">
@@ -76,3 +90,4 @@ Profile
 </div>
 </section>
 {% endblock content %}
+                

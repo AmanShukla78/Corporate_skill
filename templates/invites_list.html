@@ -1,0 +1,42 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+
+{% block content %}
+<section class="container my-5">
+    <div class="row d-flex justify-content-center">
+        <!-- recieved invites -->
+        <div class="col-6">
+            <h2>Recieved Invites</h2>
+            <ul class="list-group">
+                {% for invite in recieved_invites %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <img src="{{ invite.profile.image.url }}" alt="" width="50" height="50">
+                    <b> {{ invite.userA.username|title }} Invited you</b>
+
+                    <div class="">
+                        <a href="{% url 'invite_accept' invite.id %}" class="btn btn-success">Accept</a>
+                        <a href="{% url 'invite_reject' invite.id %}" class="btn btn-danger">Reject</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-6">
+            <h2>Sent Invites</h2>
+            <ul class="list-group">
+                {% for invite in sent_invites %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <img src="{{ invite.userB.profile.image.url }}" alt="" width="50" height="50">
+                    <b>Invited {{ invite.userB.username|title }}</b>
+                    <a href="{% url 'invite_cancel' invite.id %}" class="btn btn-danger">Cancel</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock content %}

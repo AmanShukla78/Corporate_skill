@@ -1,4 +1,4 @@
-{% extends 'layout/base.html' %}
+t{% extends 'layout/base.html' %}
 
 {% block content %}
 <!-- FontAwesome 6.2.0 CSS -->
@@ -14,26 +14,31 @@
 <section class="my-5">
     <div class="container">
         <div class="row">
-            {% for user in people %}
+            {% for invite in partners %}
             <div class="col-lg-6 mb-3" data-aos="zoom-in" data-aos-delay="100">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ user.username }}</h5>
-                        <p class="card-text">{{ user.profile.email }}</p>
-                        <p class="card-text">{{ user.profile.my_skills }}</p>
+                        <h5 class="card-title">{{ invite.profile.user.username }}</h5>
+                        <p class="card-text">{{ invite.profile.email }}</p>
+                        <p class="card-text">{{ invite.profile.my_skills }}</p>
                     </div>
                     <div class="card-footer">
-                        <!-- invite to chat-->
-                        <a href="{% url 'invite_person' user.id %}" class="btn btn-primary">
-                            <i class="fa fa-envelope"></i> Invite to chat
-                        </a>
                         <!-- view profile-->
-                        <a href="{% url 'person_view' user.id %}" class="btn btn-warning">
+                        <a href="{% url 'person_view' invite.profile.user.id %}" class="btn btn-warning">
                             <i class="fa fa-eye"></i> View profile
+                        </a>
+                        <a href="{% url 'person_chat' invite.profile.user.id %}" class="btn btn-danger">
+                            <i class="fa fa-message"></i> Chat
+                        </a>
+                        <a href="{% url 'person_call' invite.profile.user.id %}" class="btn btn-info">
+                            <i class="fa fa-camera"></i> Video Call
+                        </a>
+                        <a href="{% url 'person_report' invite.profile.user.id %}" class="btn btn-dark">
+                            <i class="fa fa-flag"></i> Report
                         </a>
                         <!-- if user is admin -->
                         {% if request.user.is_staff %}
-                        <a href="{% url 'person_delete' user.id %}" class="btn btn-danger">
+                        <a href="{% url 'person_delete' invite.profile.user.id %}" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                         </a>
                         {% endif %}
