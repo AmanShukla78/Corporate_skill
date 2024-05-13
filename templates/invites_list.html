@@ -30,7 +30,7 @@ Profile
             <ul class="list-group">
                 {% for invite in sent_invites %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <img src="{{ invite.userB.profile.image.url }}" alt="" width="50" height="50">
+                    <img src="{{ invite.profile.image.url }}" alt="" width="50" height="50">
                     <b>Invited {{ invite.userB.username|title }}</b>
                     <a href="{% url 'invite_cancel' invite.id %}" class="btn btn-danger">Cancel</a>
                 </li>
