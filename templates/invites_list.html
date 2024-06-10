@@ -18,7 +18,8 @@ Profile
                     <b> {{ invite.userA.username|title }} Invited you</b>
 
                     <div class="">
-                        <a href="{% url 'invite_accept' invite.id %}" class="btn btn-success">Accept</a>
+                        <a href="#" class="btn btn-success accept" data-bs-toggle="modal" data-bs-target="#modalId"
+                            data-id="{{invite.id}}">Accept</a>
                         <a href="{% url 'invite_reject' invite.id %}" class="btn btn-danger">Reject</a>
                     </div>
                 </li>
@@ -39,4 +40,118 @@ Profile
         </div>
     </div>
 </section>
+
+<!-- Modal Body-->
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    Corporate Aggreement form (100A)
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <!-- legal agreement form -->
+                    <pre>
+                    By clicking accept, you agree o following points
+                    1. Scope of the Agreement
+                    1.1 Skills to be Exchanged: Party A shall provide [detailed description of skills and expertise] to
+                    Party B, and Party B shall provide [detailed description of skills and expertise] to Party A.
+
+                    1.2 Objectives: The objective of this skill swap is to [state the goals and expected outcomes].
+
+                    2. Duration
+                    2.1 This Agreement shall commence on [start date] and shall continue until [end date], unless
+                    terminated earlier in accordance with the terms of this Agreement.
+
+                    3. Confidentiality
+                    3.1 Definition: "Confidential Information" means any non-public information disclosed by one party
+                    to the other in connection with this Agreement.
+
+                    3.2 Obligations: Both parties agree to keep all Confidential Information confidential and not to
+                    disclose it to any third parties or use it for any purpose other than fulfilling their obligations
+                    under this Agreement.
+
+                    4. Intellectual Property
+                    4.1 Ownership: Each party retains ownership of its pre-existing intellectual property.
+
+                    4.2 License: Any intellectual property developed jointly during the term of this Agreement shall be
+                    jointly owned by both parties, unless otherwise agreed in writing.
+
+                    5. Liability
+                    5.1 Indemnity: Each party agrees to indemnify and hold harmless the other party from any claims,
+                    losses, damages, liabilities, costs, and expenses arising out of or in connection with the
+                    performance of this Agreement, except to the extent caused by the gross negligence or willful
+                    misconduct of the indemnifying party.
+
+                    6. Dispute Resolution
+                    6.1 Negotiation: In the event of any dispute arising out of or in connection with this Agreement,
+                    the parties shall first attempt to resolve the dispute through good faith negotiations.
+
+                    6.2 Arbitration: If the dispute cannot be resolved through negotiation within [number] days, either
+                    party may refer the dispute to binding arbitration under the rules of [chosen arbitration
+                    organization].
+
+                    7. Termination
+                    7.1 Termination for Convenience: Either party may terminate this Agreement for any reason upon
+                    [number] days' written notice to the other party.
+
+                    7.2 Termination for Cause: Either party may terminate this Agreement immediately upon written notice
+                    if the other party breaches any material term of this Agreement and fails to cure such breach within
+                    [number] days of receiving written notice of the breach.
+
+                    8. Miscellaneous
+                    8.1 Entire Agreement: This Agreement constitutes the entire agreement between the parties and
+                    supersedes all prior agreements or understandings, whether written or oral, relating to the subject
+                    matter hereof.
+
+                    8.2 Amendments: No amendment or modification of this Agreement shall be valid unless in writing and
+                    signed by both parties.
+
+                    8.3 Governing Law: This Agreement shall be governed by and construed in accordance with the laws of
+                    [State/Country].
+
+                    8.4 Notices: Any notice required or permitted under this Agreement shall be in writing and shall be
+                    deemed to have been given when delivered in person, sent by overnight courier, or sent by certified
+                    or registered mail, postage prepaid, return receipt requested, to the addresses set forth above.
+
+                    IN WITNESS WHEREOF, the parties hereto have executed this Corporate Skill Swap Agreement as of the
+                    day and year first above written.
+                </pre>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <a type="button" class="btn btn-primary" href="" id="accept-confirm">Accept Invite for
+                    skill exchange</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock content %}
+
+
+{% block js %}
+<script>
+    window.onload = function () {
+        console.log('loaded');
+        document.querySelectorAll('.accept').forEach((btn) => {
+            console.log(btn);
+            btn.addEventListener('click', (e) => {
+                const inviteId = e.target.getAttribute('data-id');
+                console.log(inviteId);
+                // window.location.href = `/invite/${inviteId}/accept/`;
+                e.preventDefault();
+                link = `/invite/${inviteId}/accept`;
+                console.log(link);
+                document.getElementById('accept-confirm').setAttribute('href', link);
+            });
+        });
+    }
+</script>
+{% endblock js %}
